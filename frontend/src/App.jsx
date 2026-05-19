@@ -157,11 +157,11 @@ function App() {
 
           {/* CENTER */}
 
-          <div className="flex-1 flex flex-col p-8 overflow-hidden">
+          <div className="flex-1 flex flex-col p-6 overflow-hidden relative">
 
             {/* CHAT AREA */}
 
-            <div className="flex-1 overflow-y-auto space-y-6 pr-4">
+            <div className="flex-1 overflow-y-auto space-y-6 pr-4 pb-40 scroll-smooth">
 
               {messages.length === 0 && (
 
@@ -219,13 +219,14 @@ function App() {
 
             {/* INPUT AREA */}
 
-            <div className="mt-6 bg-white/80 backdrop-blur-xl rounded-[32px] shadow-2xl border border-white/40 p-7 space-y-5">
+            <div className="sticky bottom-0 mt-4 bg-white/90 backdrop-blur-xl rounded-[28px] shadow-2xl border border-white/40 p-5 space-y-4">
 
               <textarea
+                rows={3}
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 placeholder="Paste AI-generated content..."
-                className="w-full h-40 border border-slate-200 rounded-3xl p-5 focus:outline-none focus:ring-4 focus:ring-blue-200 bg-slate-50 text-lg resize-none"
+                className="w-full resize-none rounded-3xl border border-gray-200 bg-white p-5 text-[15px] shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
               />
 
               <div className="grid grid-cols-4 gap-4">
@@ -234,35 +235,35 @@ function App() {
                   placeholder="Tone"
                   value={tone}
                   onChange={(e) => setTone(e.target.value)}
-                  className="border border-slate-200 rounded-2xl p-4 bg-slate-50 focus:outline-none focus:ring-4 focus:ring-blue-200"
+                  className="border border-slate-200 rounded-2xl px-4 py-3 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-blue-200 text-sm"
                 />
 
                 <input
                   placeholder="Audience"
                   value={audience}
                   onChange={(e) => setAudience(e.target.value)}
-                  className="border border-slate-200 rounded-2xl p-4 bg-slate-50 focus:outline-none focus:ring-4 focus:ring-blue-200"
+                  className="border border-slate-200 rounded-2xl px-4 py-3 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-blue-200 text-sm"
                 />
 
                 <input
                   placeholder="Intent"
                   value={intent}
                   onChange={(e) => setIntent(e.target.value)}
-                  className="border border-slate-200 rounded-2xl p-4 bg-slate-50 focus:outline-none focus:ring-4 focus:ring-blue-200"
+                  className="border border-slate-200 rounded-2xl px-4 py-3 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-blue-200 text-sm"
                 />
 
                 <input
                   placeholder="Theme"
                   value={theme}
                   onChange={(e) => setTheme(e.target.value)}
-                  className="border border-slate-200 rounded-2xl p-4 bg-slate-50 focus:outline-none focus:ring-4 focus:ring-blue-200"
+                  className="border border-slate-200 rounded-2xl px-4 py-3 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-blue-200 text-sm"
                 />
 
               </div>
 
               <button
                 onClick={handleGenerate}
-                className="bg-gradient-to-r from-blue-500 to-indigo-600 hover:scale-[1.02] transition-all duration-300 text-white px-8 py-4 rounded-2xl font-semibold shadow-xl"
+                className="bg-gradient-to-r from-blue-500 to-indigo-600 hover:scale-[1.02] transition-all duration-300 text-white px-7 py-3 rounded-2xl font-semibold shadow-xl text-sm"
               >
                 Generate Refined Content
               </button>
