@@ -1,3 +1,4 @@
+import ReactMarkdown from "react-markdown"
 export default function ChatBubble({ message, isUser }) {
 
   return (
@@ -26,7 +27,7 @@ export default function ChatBubble({ message, isUser }) {
           }
         `}
       >
-        {message}
+      <ReactMarkdown>{message}</ReactMarkdown>
       </div>
 
     </div>

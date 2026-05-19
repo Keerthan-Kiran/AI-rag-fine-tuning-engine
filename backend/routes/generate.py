@@ -1,4 +1,5 @@
 from fastapi import APIRouter
+from fastapi.responses import PlainTextResponse
 from pydantic import BaseModel
 
 from services.llm_service import generate_content
@@ -46,6 +47,4 @@ Requirements:
 
     result = generate_content(prompt)
 
-    return {
-        "response": result
-    }
+    return PlainTextResponse(result)

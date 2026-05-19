@@ -4,7 +4,7 @@ def generate_content(prompt):
 
     response = ollama.chat(
 
-        model="phi3",
+        model="phi3:mini",
 
         messages=[
             {
