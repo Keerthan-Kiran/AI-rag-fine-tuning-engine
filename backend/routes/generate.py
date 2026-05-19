@@ -1,35 +1,51 @@
 from fastapi import APIRouter
-from fastapi.responses import StreamingResponse
+from pydantic import BaseModel
 
-from services.retrieval_service import retrieve_context
-from services.prompt_service import build_prompt
-from services.streaming_service import stream_response
+from services.llm_service import generate_content
 
 router = APIRouter()
 
+class GenerateRequest(BaseModel):
+
+    raw_content: str
+    tone: str
+    audience: str
+    intent: str
+    theme: str
 
 @router.post("/generate")
-async def generate(data: dict):
-    raw_content = data.get("raw_content")
-    tone = data.get("tone")
-    audience = data.get("audience")
-    intent = data.get("intent")
-    theme = data.get("theme")
+async def generate(data: GenerateRequest):
 
-    retrieved_chunks = retrieve_context(raw_content)
+    prompt = f"""
+You are a professional AI content refinement assistant.
 
-    context = "\n".join(retrieved_chunks)
+Refine the following content professionally.
 
-    prompt = build_prompt(
-        raw_content,
-        tone,
-        audience,
-        intent,
-        theme,
-        context
-    )
+CONTENT:
+{data.raw_content}
 
-    return StreamingResponse(
-        stream_response(prompt),
-        media_type="text/plain"
-    )
+TONE:
+{data.tone}
+
+AUDIENCE:
+{data.audience}
+
+INTENT:
+{data.intent}
+
+THEME:
+{data.theme}
+
+Requirements:
+- Improve readability
+- Improve professionalism
+- Improve engagement
+- Make it human-like
+- Keep it concise but impactful
+"""
+
+    result = generate_content(prompt)
+
+    return {
+        "response": result
+    }

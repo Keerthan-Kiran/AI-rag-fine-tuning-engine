@@ -18,6 +18,8 @@ function App() {
 
   const [typing, setTyping] = useState(false)
 
+  const [retrievedContext, setRetrievedContext] = useState("")
+
   const [uploadedFiles, setUploadedFiles] = useState([])
 
   const handleUpload = async (file) => {
@@ -37,9 +39,30 @@ function App() {
 
       if (response.ok) {
 
+        // SHOW FILE IN UI
         setUploadedFiles((prev) => [...prev, file.name])
 
-        alert("Document uploaded successfully")
+        // RETRIEVE CONTEXT
+        const contextResponse = await fetch(
+          "http://127.0.0.1:8000/retrieve-context",
+          {
+            method: "POST",
+
+            headers: {
+              "Content-Type": "application/json",
+            },
+
+            body: JSON.stringify({
+              query: "document summary",
+            }),
+          }
+        )
+
+        const contextData = await contextResponse.json()
+
+        setRetrievedContext(
+          contextData.context.join("\n\n")
+        )
 
       } else {
 
@@ -57,9 +80,16 @@ function App() {
 
     if (!input.trim()) return
 
+    // SAVE INPUT BEFORE CLEARING
+    const currentInput = input
+
+    // CLEAR INPUT IMMEDIATELY
+    setInput("")
+
+    // USER MESSAGE
     const userMessage = {
       role: "user",
-      content: input,
+      content: currentInput,
     }
 
     setMessages((prev) => [...prev, userMessage])
@@ -78,7 +108,7 @@ function App() {
           },
 
           body: JSON.stringify({
-            raw_content: input,
+            raw_content: currentInput,
             tone,
             audience,
             intent,
@@ -89,16 +119,21 @@ function App() {
 
       const data = await response.text()
 
-      const aiMessage = {
-        role: "assistant",
-        content: data,
-      }
-
-      setMessages((prev) => [...prev, aiMessage])
+      console.log(data)
 
       setTyping(false)
 
-      setInput("")
+      // DELAY FOR NATURAL AI EFFECT
+      setTimeout(() => {
+
+        const aiMessage = {
+          role: "assistant",
+          content: String(data),
+        }
+
+        setMessages((prev) => [...prev, aiMessage])
+
+      }, 500)
 
     } catch (error) {
 
@@ -273,7 +308,7 @@ function App() {
 
             </div>
 
-            <ContextPreview />
+            <ContextPreview context={retrievedContext} />
 
           </div>
 

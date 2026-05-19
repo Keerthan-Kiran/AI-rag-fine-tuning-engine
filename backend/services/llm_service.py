@@ -1,15 +1,18 @@
 import ollama
 
+def generate_content(prompt):
 
-def generate_response(prompt):
     response = ollama.chat(
-        model="mistral",
+
+        model="phi3",
+
         messages=[
             {
                 "role": "user",
                 "content": prompt
             }
         ]
+
     )
 
     return response["message"]["content"]

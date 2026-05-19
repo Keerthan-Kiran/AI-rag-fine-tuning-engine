@@ -1,8 +1,6 @@
-import { FiUploadCloud } from "react-icons/fi"
+export default function UploadBox({ onUpload }) {
 
-const UploadBox = ({ onUpload }) => {
-
-  const handleFile = (e) => {
+  const handleChange = (e) => {
 
     const file = e.target.files[0]
 
@@ -13,26 +11,30 @@ const UploadBox = ({ onUpload }) => {
 
   return (
 
-    <label className="border-2 border-dashed border-blue-300 bg-white/70 backdrop-blur-xl rounded-[32px] p-10 flex flex-col items-center justify-center cursor-pointer hover:shadow-2xl hover:scale-[1.01] transition-all duration-300">
+    <div className="bg-white/80 backdrop-blur-xl rounded-[32px] shadow-xl p-6 border border-white/40">
 
-      <FiUploadCloud className="text-6xl text-blue-500 mb-4" />
+      <label className="border-2 border-dashed border-blue-300 rounded-3xl h-64 flex flex-col items-center justify-center cursor-pointer hover:bg-blue-50 transition-all">
 
-      <h2 className="text-2xl font-bold text-slate-800">
-        Upload PDF or TXT
-      </h2>
+        <div className="text-6xl text-blue-500 mb-4">
+          ↑
+        </div>
 
-      <p className="text-slate-500 mt-2">
-        Drag & drop or click to upload
-      </p>
+        <h2 className="text-2xl font-bold text-slate-800">
+          Upload PDF or TXT
+        </h2>
 
-      <input
-        type="file"
-        className="hidden"
-        onChange={handleFile}
-      />
+        <p className="text-slate-500 mt-2">
+          Drag & drop or click to upload
+        </p>
 
-    </label>
+        <input
+          type="file"
+          className="hidden"
+          onChange={handleChange}
+        />
+
+      </label>
+
+    </div>
   )
 }
-
-export default UploadBox
