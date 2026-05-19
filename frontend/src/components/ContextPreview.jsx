@@ -1,27 +1,37 @@
-const ContextPreview = ({ contexts }) => {
+const ContextPreview = ({ context = [] }) => {
 
   return (
 
-    <div className="bg-white/80 backdrop-blur-xl rounded-[32px] shadow-xl p-6 border border-white/40">
+    <div className="bg-white rounded-3xl shadow-xl p-6 h-[260px] overflow-y-auto">
 
-      <h3 className="font-semibold mb-4">
+      <h2 className="text-xl font-semibold text-slate-800 mb-4">
         Retrieved Context
-      </h3>
+      </h2>
 
-      <div className="space-y-3 max-h-[300px] overflow-y-auto">
+      {context.length === 0 ? (
 
-        {contexts.map((ctx, index) => (
+        <div className="text-slate-400 text-sm">
+          Uploaded document context will appear here...
+        </div>
 
-          <div
-            key={index}
-            className="bg-gray-50 p-3 rounded-xl text-sm text-gray-700"
-          >
-            {ctx}
-          </div>
+      ) : (
 
-        ))}
+        <div className="space-y-4">
 
-      </div>
+          {context.map((item, index) => (
+
+            <div
+              key={index}
+              className="bg-slate-50 border border-slate-200 rounded-2xl p-4 text-sm text-slate-700 leading-6"
+            >
+              {item}
+            </div>
+
+          ))}
+
+        </div>
+
+      )}
 
     </div>
   )
