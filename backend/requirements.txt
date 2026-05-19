@@ -1,0 +1,16 @@
+fastapi
+uvicorn
+python-multipart
+langchain
+langchain-community
+faiss-cpu
+sentence-transformers
+pymupdf
+ollama
+numpy
+pandas
+textstat
+language-tool-python
+httpx
+python-dotenv
+langchain-text-splitters

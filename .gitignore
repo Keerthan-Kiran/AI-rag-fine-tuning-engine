@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Vector store
+backend/vector_store/
+backend/uploaded_docs/
+
+# Environment
+.env
+
+# Node
+node_modules/
+dist/
+
+# VSCode
+.vscode/
+
+# Logs
+*.log
