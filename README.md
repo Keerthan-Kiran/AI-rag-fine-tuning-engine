@@ -236,3 +236,21 @@ ollama run mistral
 
 ---
 
+# 📸 Screenshots
+
+## Dashboard
+
+![Dashboard](screenshots/dashboard.png)
+
+---
+
+## Upload System
+
+![Upload](screenshots/upload.png)
+
+---
+
+## AI Generation
+
+![Generation](screenshots/generation.png)
+
